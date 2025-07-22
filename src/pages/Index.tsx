@@ -8,28 +8,32 @@ const projects = [
     description: "A powerful SQL database engine designed for high-performance data processing and analysis. Features advanced query optimization and scalable architecture.",
     technologies: ["SQL", "Database", "Performance Optimization"],
     githubUrl: "https://github.com/aldo-g/SQLCore",
-    type: "Database Engine"
+    type: "Database Engine",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop"
   },
   {
     title: "Vuxi",
     description: "Modern Vue.js framework extension providing enhanced UI components and developer experience. Streamlines frontend development with elegant abstractions.",
     technologies: ["Vue.js", "TypeScript", "Component Library"],
     githubUrl: "https://github.com/aldo-g/Vuxi",
-    type: "Frontend Framework"
+    type: "Frontend Framework",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop"
   },
   {
     title: "Chunk Comparator",
     description: "Intelligent document analysis tool that compares and analyzes text chunks for similarities, differences, and patterns using advanced algorithms.",
     technologies: ["Text Analysis", "Algorithms", "Data Processing"],
     githubUrl: "https://github.com/aldo-g/Chunk-comparator",
-    type: "Analysis Tool"
+    type: "Analysis Tool",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop"
   },
   {
     title: "Obsidian LLM Test",
     description: "Experimental integration testing framework for Large Language Models within the Obsidian ecosystem. Explores AI-powered knowledge management.",
     technologies: ["LLM", "Obsidian", "AI Integration", "Testing"],
     githubUrl: "https://github.com/aldo-g/obsidian-llm-test",
-    type: "AI Experiment"
+    type: "AI Experiment",
+    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop"
   }
 ];
 
@@ -72,13 +76,14 @@ const Index = () => {
 
           <div className="grid gap-6 md:grid-cols-2">
             {projects.map((project) => (
-              <ProjectCard
+                <ProjectCard
                 key={project.title}
                 title={project.title}
                 description={project.description}
                 technologies={project.technologies}
                 githubUrl={project.githubUrl}
                 type={project.type}
+                image={project.image}
               />
             ))}
           </div>

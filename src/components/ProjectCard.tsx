@@ -8,11 +8,22 @@ interface ProjectCardProps {
   technologies: string[];
   githubUrl: string;
   type?: string;
+  image?: string;
 }
 
-export const ProjectCard = ({ title, description, technologies, githubUrl, type }: ProjectCardProps) => {
+export const ProjectCard = ({ title, description, technologies, githubUrl, type, image }: ProjectCardProps) => {
   return (
-    <Card className="card-hover border-border/50 bg-card/50 backdrop-blur-sm">
+    <Card className="card-hover border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden">
+      {image && (
+        <div className="relative h-48 overflow-hidden">
+          <img
+            src={image}
+            alt={`${title} project preview`}
+            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
+        </div>
+      )}
       <CardHeader>
         <div className="flex items-start justify-between">
           <div className="space-y-2">
