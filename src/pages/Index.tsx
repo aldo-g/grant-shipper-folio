@@ -9,7 +9,7 @@ const projects = [
     technologies: ["SQL", "Database", "Performance Optimization"],
     githubUrl: "https://github.com/aldo-g/SQLCore",
     type: "Database Engine",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop"
+    image: "src/assets/sql-core-photo.png"
   },
   {
     title: "Vuxi",
@@ -17,7 +17,7 @@ const projects = [
     technologies: ["Vue.js", "TypeScript", "Component Library"],
     githubUrl: "https://github.com/aldo-g/Vuxi",
     type: "Frontend Framework",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop"
+    image: "src/assets/vuxi-photo.png"
   },
   {
     title: "Chunk Comparator",
@@ -33,7 +33,31 @@ const projects = [
     technologies: ["LLM", "Obsidian", "AI Integration", "Testing"],
     githubUrl: "https://github.com/aldo-g/obsidian-llm-test",
     type: "AI Experiment",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop"
+    image: "src/assets/obsidian-llm-test.png"
+  },
+  {
+    title: "Obsidian LLM Test",
+    description: "Experimental integration testing framework for Large Language Models within the Obsidian ecosystem. Explores AI-powered knowledge management.",
+    technologies: ["LLM", "Obsidian", "AI Integration", "Testing"],
+    githubUrl: "https://github.com/aldo-g/obsidian-llm-test",
+    type: "AI Experiment",
+    image: "src/assets/obsidian-llm-test.png"
+  },
+  {
+    title: "Obsidian LLM Test",
+    description: "Experimental integration testing framework for Large Language Models within the Obsidian ecosystem. Explores AI-powered knowledge management.",
+    technologies: ["LLM", "Obsidian", "AI Integration", "Testing"],
+    githubUrl: "https://github.com/aldo-g/obsidian-llm-test",
+    type: "AI Experiment",
+    image: "src/assets/obsidian-llm-test.png"
+  },
+  {
+    title: "Obsidian LLM Test",
+    description: "Experimental integration testing framework for Large Language Models within the Obsidian ecosystem. Explores AI-powered knowledge management.",
+    technologies: ["LLM", "Obsidian", "AI Integration", "Testing"],
+    githubUrl: "https://github.com/aldo-g/obsidian-llm-test",
+    type: "AI Experiment",
+    image: "src/assets/obsidian-llm-test.png"
   }
 ];
 
