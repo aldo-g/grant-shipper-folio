@@ -20,12 +20,12 @@ const projects = [
     image: "src/assets/vuxi-photo.png"
   },
   {
-    title: "Chunk Comparator",
+    title: "No Public Purpose",
     description: "Intelligent document analysis tool that compares and analyzes text chunks for similarities, differences, and patterns using advanced algorithms.",
     technologies: ["Text Analysis", "Algorithms", "Data Processing"],
-    githubUrl: "https://github.com/aldo-g/Chunk-comparator",
+    githubUrl: "https://github.com/aldo-g/NoPublicPurpose",
     type: "Analysis Tool",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop"
+    image: "src/assets/no-public-purpose-logo.png"
   },
   {
     title: "Obsidian LLM Test",
@@ -36,28 +36,28 @@ const projects = [
     image: "src/assets/obsidian-llm-test.png"
   },
   {
-    title: "Obsidian LLM Test",
+    title: "Rota Boat",
     description: "Experimental integration testing framework for Large Language Models within the Obsidian ecosystem. Explores AI-powered knowledge management.",
     technologies: ["LLM", "Obsidian", "AI Integration", "Testing"],
-    githubUrl: "https://github.com/aldo-g/obsidian-llm-test",
+    githubUrl: "https://github.com/aldo-g/rota-boat",
     type: "AI Experiment",
-    image: "src/assets/obsidian-llm-test.png"
+    image: "src/assets/rota-boat-photo.png"
   },
   {
-    title: "Obsidian LLM Test",
+    title: "EPI Conflcit map",
     description: "Experimental integration testing framework for Large Language Models within the Obsidian ecosystem. Explores AI-powered knowledge management.",
     technologies: ["LLM", "Obsidian", "AI Integration", "Testing"],
-    githubUrl: "https://github.com/aldo-g/obsidian-llm-test",
+    githubUrl: "https://github.com/aldo-g/conflict-map",
     type: "AI Experiment",
-    image: "src/assets/obsidian-llm-test.png"
+    image: "src/assets/conflict-map.png"
   },
   {
-    title: "Obsidian LLM Test",
+    title: "Compile Context Extension",
     description: "Experimental integration testing framework for Large Language Models within the Obsidian ecosystem. Explores AI-powered knowledge management.",
     technologies: ["LLM", "Obsidian", "AI Integration", "Testing"],
-    githubUrl: "https://github.com/aldo-g/obsidian-llm-test",
+    githubUrl: "https://github.com/aldo-g/compile-context-ext",
     type: "AI Experiment",
-    image: "src/assets/obsidian-llm-test.png"
+    image: "src/assets/compile-context-ext.png"
   }
 ];
 

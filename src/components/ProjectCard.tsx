@@ -29,14 +29,16 @@ export const ProjectCard = ({ title, description, technologies, githubUrl, type,
       <div className="relative z-10 h-full flex flex-col">
         <CardHeader className="flex-shrink-0">
           <div className="flex items-start justify-between">
-            <div className="space-y-2">
+            <div className="space-y-3">
               <CardTitle className="text-xl font-semibold text-foreground drop-shadow-lg bg-background/60 backdrop-blur-sm rounded-lg px-3 py-2 inline-block">
                 {title}
               </CardTitle>
               {type && (
-                <Badge variant="secondary" className="text-xs bg-background/80 backdrop-blur-sm">
-                  {type}
-                </Badge>
+                <div>
+                  <Badge variant="secondary" className="text-xs bg-background/80 backdrop-blur-sm">
+                    {type}
+                  </Badge>
+                </div>
               )}
             </div>
             <a
@@ -52,10 +54,10 @@ export const ProjectCard = ({ title, description, technologies, githubUrl, type,
         </CardHeader>
         
         <CardContent className="space-y-4 flex-grow flex flex-col justify-end">
-          <CardDescription className="text-muted-foreground leading-relaxed drop-shadow-sm bg-background/70 backdrop-blur-md rounded-lg p-4">
+          <CardDescription className="text-white leading-relaxed drop-shadow-sm bg-background/70 backdrop-blur-md rounded-lg p-4">
             {description}
           </CardDescription>
-          <div className="flex flex-wrap gap-2 bg-background/50 backdrop-blur-sm rounded-lg p-3">
+          <div className="flex flex-wrap gap-2">
             {technologies.map((tech) => (
               <Badge
                 key={tech}
