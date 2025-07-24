@@ -3,6 +3,8 @@ import { SocialLinks } from "@/components/SocialLinks";
 import { ProjectsTab } from "@/components/ProjectsTab";
 import { ExperienceTab } from "@/components/ExperienceTab";
 import { LiquidTabBar } from "@/components/LiquidTabBar";
+import { ChatButton } from "@/components/ChatButton";
+import { ChatOverlay } from "@/components/ChatOverlay";
 import profilePhoto from "@/assets/profile-photo.jpg";
 
 const tabs = [
@@ -12,6 +14,7 @@ const tabs = [
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("projects");
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background">
@@ -63,6 +66,16 @@ const Index = () => {
           </p>
         </div>
       </div>
+
+      {/* Chat Components */}
+      <ChatButton 
+        onClick={() => setIsChatOpen(!isChatOpen)} 
+        isOpen={isChatOpen}
+      />
+      <ChatOverlay 
+        isOpen={isChatOpen} 
+        onClose={() => setIsChatOpen(false)} 
+      />
     </div>
   );
 };
