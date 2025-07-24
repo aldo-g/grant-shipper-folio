@@ -1,10 +1,18 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useState } from "react";
 import { SocialLinks } from "@/components/SocialLinks";
 import { ProjectsTab } from "@/components/ProjectsTab";
 import { ExperienceTab } from "@/components/ExperienceTab";
+import { LiquidTabBar } from "@/components/LiquidTabBar";
 import profilePhoto from "@/assets/profile-photo.jpg";
 
+const tabs = [
+  { id: "projects", label: "Projects" },
+  { id: "experience", label: "Experience" }
+];
+
 const Index = () => {
+  const [activeTab, setActiveTab] = useState("projects");
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-6 py-16 max-w-6xl">
@@ -32,31 +40,21 @@ const Index = () => {
           <SocialLinks />
         </div>
 
-        {/* Tabbed Content */}
-        <Tabs defaultValue="projects" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-8 bg-card/50 border border-border/50">
-            <TabsTrigger 
-              value="projects" 
-              className="text-base py-3 data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"
-            >
-              Projects
-            </TabsTrigger>
-            <TabsTrigger 
-              value="experience"
-              className="text-base py-3 data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"
-            >
-              Experience
-            </TabsTrigger>
-          </TabsList>
+        {/* Liquid Tab Bar */}
+        <div className="flex justify-center mb-8">
+          <LiquidTabBar 
+            tabs={tabs}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+            className="w-full max-w-md"
+          />
+        </div>
 
-          <TabsContent value="projects" className="space-y-8">
-            <ProjectsTab />
-          </TabsContent>
-
-          <TabsContent value="experience" className="space-y-8">
-            <ExperienceTab />
-          </TabsContent>
-        </Tabs>
+        {/* Tab Content */}
+        <div className="space-y-8">
+          {activeTab === "projects" && <ProjectsTab />}
+          {activeTab === "experience" && <ExperienceTab />}
+        </div>
 
         {/* Footer */}
         <div className="mt-20 pt-8 border-t border-border/50 text-center">
