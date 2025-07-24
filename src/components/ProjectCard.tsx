@@ -15,6 +15,7 @@ interface ProjectCardProps {
   isExpanding: boolean;
   isSibling: boolean;
   expandStage: 'row' | 'fullscreen' | null;
+  targetPosition?: { row: number; col: number };
   onExpand: () => void;
   onClose: () => void;
 }
@@ -32,6 +33,7 @@ export const ProjectCard = ({
   isExpanding,
   isSibling,
   expandStage,
+  targetPosition,
   onExpand,
   onClose
 }: ProjectCardProps) => {
@@ -46,13 +48,10 @@ export const ProjectCard = ({
     if (isExpanding) {
       // Expanding to fill row without scaling up
       return "md:col-span-2 transition-all duration-600 ease-out min-h-[600px]";
-    } else if (isSibling) {
-      // Calculate target row: sibling moves to the next row down from its current row
-      const currentRow = Math.floor(index / 2) + 1; // Current row (1-indexed)
-      const targetRow = currentRow + 1; // Move to next row down
-      
-      // Map to specific Tailwind classes to ensure they're included in build
+    } else if (targetPosition) {
+      // Use calculated target position for sliding animation
       const rowClasses = {
+        1: "md:row-start-1",
         2: "md:row-start-2",
         3: "md:row-start-3", 
         4: "md:row-start-4",
@@ -60,9 +59,24 @@ export const ProjectCard = ({
         6: "md:row-start-6"
       };
       
-      const rowClass = rowClasses[targetRow as keyof typeof rowClasses] || "md:row-start-2";
-      return `transition-all duration-600 ease-out ${rowClass} md:col-start-1`;
+      const colClasses = {
+        1: "md:col-start-1",
+        2: "md:col-start-2"
+      };
+
+      const rowClass = rowClasses[targetPosition.row as keyof typeof rowClasses] || "md:row-start-1";
+      const colClass = colClasses[targetPosition.col as keyof typeof colClasses] || "md:col-start-1";
+      
+      // Check if this card has moved from its original position
+      const originalRow = Math.floor(index / 2) + 1;
+      const originalCol = (index % 2) + 1;
+      const hasMoved = targetPosition.row !== originalRow || targetPosition.col !== originalCol;
+      
+      if (hasMoved) {
+        return `transition-all duration-600 ease-out ${rowClass} ${colClass}`;
+      }
     }
+    
     return "transition-all duration-300";
   };
 

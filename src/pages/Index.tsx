@@ -66,11 +66,86 @@ const projects = [
   }
 ];
 
+interface CardPosition {
+  row: number;
+  col: number;
+}
+
 const Index = () => {
   const [expandingCardIndex, setExpandingCardIndex] = useState<number | null>(null);
   const [expandStage, setExpandStage] = useState<'row' | 'fullscreen' | null>(null);
+  const [cardPositions, setCardPositions] = useState<Record<number, CardPosition>>({});
+
+  // Calculate all card positions when a card expands
+  const calculateCardPositions = (expandingIndex: number): Record<number, CardPosition> => {
+    const positions: Record<number, CardPosition> = {};
+    
+    // Calculate original positions for all cards
+    for (let i = 0; i < projects.length; i++) {
+      positions[i] = {
+        row: Math.floor(i / 2) + 1,
+        col: (i % 2) + 1
+      };
+    }
+
+    // If no card is expanding, return original positions
+    if (expandingIndex === -1) return positions;
+
+    const expandingRow = positions[expandingIndex].row;
+    
+    // Find the sibling (other card in same row)
+    const siblingIndex = expandingIndex % 2 === 0 ? expandingIndex + 1 : expandingIndex - 1;
+    
+    // Only proceed if sibling exists
+    if (siblingIndex < projects.length) {
+      const siblingOriginalCol = positions[siblingIndex].col;
+      
+      // Check if this is the last row (no cards below the expanding row)
+      const isLastRow = !projects.some((_, i) => {
+        const cardRow = Math.floor(i / 2) + 1;
+        return cardRow > expandingRow;
+      });
+      
+      if (isLastRow) {
+        // If it's the last row, sibling moves to column 2 of the same row
+        positions[siblingIndex] = {
+          row: expandingRow,
+          col: 2
+        };
+      } else {
+        // If not the last row, sibling moves down one row but stays in its original column
+        positions[siblingIndex] = {
+          row: expandingRow + 1,
+          col: siblingOriginalCol
+        };
+
+        // Find all cards that need to slide down:
+        // Cards in the same column as the sibling, below the expanding row
+        for (let i = 0; i < projects.length; i++) {
+          if (i === expandingIndex || i === siblingIndex) continue;
+          
+          const originalPos = {
+            row: Math.floor(i / 2) + 1,
+            col: (i % 2) + 1
+          };
+
+          // If card is in same column as sibling and below the expanding row, slide it down
+          if (originalPos.col === siblingOriginalCol && originalPos.row > expandingRow) {
+            positions[i] = {
+              row: originalPos.row + 1,
+              col: originalPos.col
+            };
+          }
+        }
+      }
+    }
+
+    return positions;
+  };
 
   const handleCardExpand = (index: number) => {
+    const newPositions = calculateCardPositions(index);
+    setCardPositions(newPositions);
     setExpandingCardIndex(index);
     setExpandStage('row');
     
@@ -82,6 +157,10 @@ const Index = () => {
 
   const handleCardClose = () => {
     setExpandStage(null);
+    // Reset positions to original layout
+    const originalPositions = calculateCardPositions(-1);
+    setCardPositions(originalPositions);
+    
     setTimeout(() => {
       setExpandingCardIndex(null);
     }, 300);
@@ -127,7 +206,8 @@ const Index = () => {
             {projects.map((project, index) => {
               const isExpanding = expandingCardIndex === index;
               const siblingIndex = index % 2 === 0 ? index + 1 : index - 1;
-              const isSibling = expandingCardIndex === siblingIndex;
+              const isSibling = expandingCardIndex === siblingIndex && siblingIndex < projects.length;
+              const targetPosition = cardPositions[index];
               
               return (
                 <ProjectCard
@@ -143,6 +223,7 @@ const Index = () => {
                   isExpanding={isExpanding}
                   isSibling={isSibling}
                   expandStage={expandStage}
+                  targetPosition={targetPosition}
                   onExpand={() => handleCardExpand(index)}
                   onClose={handleCardClose}
                 />
