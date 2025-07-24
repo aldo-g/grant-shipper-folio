@@ -47,8 +47,21 @@ export const ProjectCard = ({
       // Expanding to fill row without scaling up
       return "md:col-span-2 transition-all duration-600 ease-out min-h-[600px]";
     } else if (isSibling) {
-      // Sibling explicitly moves to row 2, column 1 regardless of which card expands
-      return "transition-all duration-600 ease-out md:row-start-2 md:col-start-1";
+      // Calculate target row: sibling moves to the next row down from its current row
+      const currentRow = Math.floor(index / 2) + 1; // Current row (1-indexed)
+      const targetRow = currentRow + 1; // Move to next row down
+      
+      // Map to specific Tailwind classes to ensure they're included in build
+      const rowClasses = {
+        2: "md:row-start-2",
+        3: "md:row-start-3", 
+        4: "md:row-start-4",
+        5: "md:row-start-5",
+        6: "md:row-start-6"
+      };
+      
+      const rowClass = rowClasses[targetRow as keyof typeof rowClasses] || "md:row-start-2";
+      return `transition-all duration-600 ease-out ${rowClass} md:col-start-1`;
     }
     return "transition-all duration-300";
   };
