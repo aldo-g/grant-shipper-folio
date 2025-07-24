@@ -14,6 +14,7 @@ interface ProjectCardProps {
   index: number;
   isExpanding: boolean;
   isSibling: boolean;
+  expandStage: 'row' | 'fullscreen' | null;
   onExpand: () => void;
   onClose: () => void;
 }
@@ -30,6 +31,7 @@ export const ProjectCard = ({
   index,
   isExpanding,
   isSibling,
+  expandStage,
   onExpand,
   onClose
 }: ProjectCardProps) => {
@@ -42,8 +44,8 @@ export const ProjectCard = ({
   // Get animation classes based on card state
   const getCardClasses = () => {
     if (isExpanding) {
-      // Expanding to fill row with increased height
-      return "md:col-span-2 transform scale-105 transition-all duration-600 ease-out min-h-[600px]";
+      // Expanding to fill row without scaling up
+      return "md:col-span-2 transition-all duration-600 ease-out min-h-[600px]";
     } else if (isSibling) {
       // Sibling explicitly moves to row 2, column 1 regardless of which card expands
       return "transition-all duration-600 ease-out md:row-start-2 md:col-start-1";
@@ -55,7 +57,7 @@ export const ProjectCard = ({
 
   return (
     <Card 
-      className={`card-hover border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden relative group ${cardHeight} ${getCardClasses()}`}
+      className={`${!isExpanding ? 'card-hover' : ''} border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden relative group ${cardHeight} ${getCardClasses()}`}
       onClick={!isExpanding ? onExpand : undefined}
       style={{ cursor: isExpanding ? 'default' : 'pointer' }}
     >
@@ -188,7 +190,7 @@ export const ProjectCard = ({
               </div>
 
               {/* Technologies Section */}
-              <div className="bg-background/40 backdrop-blur-md rounded-xl p-6 border border-border/20">
+              <div className="p-6">
                 <h4 className="text-lg font-semibold text-foreground mb-4 drop-shadow-sm">Technologies Used</h4>
                 <div className="flex flex-wrap gap-3">
                   {technologies.map((tech) => (
