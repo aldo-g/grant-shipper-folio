@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SocialLinks } from "@/components/SocialLinks";
 import profilePhoto from "@/assets/profile-photo.jpg";
@@ -8,6 +9,7 @@ const projects = [
     description: "A powerful SQL database engine designed for high-performance data processing and analysis. Features advanced query optimization and scalable architecture.",
     technologies: ["SQL", "Database", "Performance Optimization"],
     githubUrl: "https://github.com/aldo-g/SQLCore",
+    websiteUrl: "https://sqlcore-demo.com",
     type: "Database Engine",
     image: "src/assets/sql-core-photo.png"
   },
@@ -24,6 +26,7 @@ const projects = [
     description: "Intelligent document analysis tool that compares and analyzes text chunks for similarities, differences, and patterns using advanced algorithms.",
     technologies: ["Text Analysis", "Algorithms", "Data Processing"],
     githubUrl: "https://github.com/aldo-g/NoPublicPurpose",
+    websiteUrl: "https://www.nopublicpurpose.com",
     type: "Analysis Tool",
     image: "src/assets/no-public-purpose-logo.png"
   },
@@ -40,14 +43,16 @@ const projects = [
     description: "Experimental integration testing framework for Large Language Models within the Obsidian ecosystem. Explores AI-powered knowledge management.",
     technologies: ["LLM", "Obsidian", "AI Integration", "Testing"],
     githubUrl: "https://github.com/aldo-g/rota-boat",
+    websiteUrl: "https://rota-boat.web.app",
     type: "AI Experiment",
     image: "src/assets/rota-boat-photo.png"
   },
   {
-    title: "EPI Conflcit map",
+    title: "EPI Conflict map",
     description: "Experimental integration testing framework for Large Language Models within the Obsidian ecosystem. Explores AI-powered knowledge management.",
     technologies: ["LLM", "Obsidian", "AI Integration", "Testing"],
     githubUrl: "https://github.com/aldo-g/conflict-map",
+    websiteUrl: "https://conflict-map.vercel.app",
     type: "AI Experiment",
     image: "src/assets/conflict-map.png"
   },
@@ -62,6 +67,26 @@ const projects = [
 ];
 
 const Index = () => {
+  const [expandingCardIndex, setExpandingCardIndex] = useState<number | null>(null);
+  const [expandStage, setExpandStage] = useState<'row' | 'fullscreen' | null>(null);
+
+  const handleCardExpand = (index: number) => {
+    setExpandingCardIndex(index);
+    setExpandStage('row');
+    
+    // After row expansion, transition to fullscreen
+    setTimeout(() => {
+      setExpandStage('fullscreen');
+    }, 600);
+  };
+
+  const handleCardClose = () => {
+    setExpandStage(null);
+    setTimeout(() => {
+      setExpandingCardIndex(null);
+    }, 300);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-6 py-16 max-w-4xl">
@@ -99,17 +124,30 @@ const Index = () => {
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
-            {projects.map((project) => (
+            {projects.map((project, index) => {
+              const isExpanding = expandingCardIndex === index;
+              const siblingIndex = index % 2 === 0 ? index + 1 : index - 1;
+              const isSibling = expandingCardIndex === siblingIndex;
+              
+              return (
                 <ProjectCard
-                key={project.title}
-                title={project.title}
-                description={project.description}
-                technologies={project.technologies}
-                githubUrl={project.githubUrl}
-                type={project.type}
-                image={project.image}
-              />
-            ))}
+                  key={project.title}
+                  title={project.title}
+                  description={project.description}
+                  technologies={project.technologies}
+                  githubUrl={project.githubUrl}
+                  websiteUrl={project.websiteUrl}
+                  type={project.type}
+                  image={project.image}
+                  index={index}
+                  isExpanding={isExpanding}
+                  isSibling={isSibling}
+                  expandStage={expandStage}
+                  onExpand={() => handleCardExpand(index)}
+                  onClose={handleCardClose}
+                />
+              );
+            })}
           </div>
         </div>
 
