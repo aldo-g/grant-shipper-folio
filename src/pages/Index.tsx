@@ -131,10 +131,23 @@ const Index = () => {
 
           // If card is in same column as sibling and below the expanding row, slide it down
           if (originalPos.col === siblingOriginalCol && originalPos.row > expandingRow) {
-            positions[i] = {
-              row: originalPos.row + 1,
-              col: originalPos.col
-            };
+            const newRow = originalPos.row + 1;
+            
+            // Special case: If this is the bottom card in column 1 and has no neighbor,
+            // slide it to column 2 instead of moving it down in column 1
+            const isBottomCardInCol1 = originalPos.col === 1 && i === projects.length - 1 && projects.length % 2 === 1;
+            
+            if (isBottomCardInCol1) {
+              positions[i] = {
+                row: originalPos.row, // Keep the same row, just move to column 2
+                col: 2
+              };
+            } else {
+              positions[i] = {
+                row: newRow,
+                col: originalPos.col
+              };
+            }
           }
         }
       }
