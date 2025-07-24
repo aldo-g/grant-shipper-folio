@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SocialLinks } from "@/components/SocialLinks";
 import profilePhoto from "@/assets/profile-photo.jpg";
@@ -71,85 +71,77 @@ interface CardPosition {
   col: number;
 }
 
+// Easing function for a more natural scroll animation
+const easeInOutQuad = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+const smoothScrollTo = (element: HTMLElement, duration: number) => {
+  const startingY = window.pageYOffset;
+  const elementY = window.pageYOffset + element.getBoundingClientRect().top;
+  // Use the card's known final height (600px) for a stable calculation
+  const finalCardHeight = 600; 
+  const targetY = elementY - (window.innerHeight / 2) + (finalCardHeight / 2);
+  const diff = targetY - startingY;
+  let start: number;
+
+  window.requestAnimationFrame(function step(timestamp) {
+    if (!start) start = timestamp;
+    const time = timestamp - start;
+    const percent = Math.min(time / duration, 1);
+    const easedPercent = easeInOutQuad(percent);
+    
+    window.scrollTo(0, startingY + diff * easedPercent);
+    
+    if (time < duration) {
+      window.requestAnimationFrame(step);
+    }
+  });
+};
+
 const Index = () => {
   const [expandingCardIndex, setExpandingCardIndex] = useState<number | null>(null);
-  const [expandStage, setExpandStage] = useState<'row' | 'fullscreen' | null>(null);
   const [cardPositions, setCardPositions] = useState<Record<number, CardPosition>>({});
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Calculate all card positions when a card expands
+  useEffect(() => {
+    cardRefs.current = cardRefs.current.slice(0, projects.length);
+  }, []);
+
   const calculateCardPositions = (expandingIndex: number): Record<number, CardPosition> => {
     const positions: Record<number, CardPosition> = {};
-    
-    // Calculate original positions for all cards
+    const numCols = 2;
+
     for (let i = 0; i < projects.length; i++) {
       positions[i] = {
-        row: Math.floor(i / 2) + 1,
-        col: (i % 2) + 1
+        row: Math.floor(i / numCols) + 1,
+        col: (i % numCols) + 1,
       };
     }
 
-    // If no card is expanding, return original positions
-    if (expandingIndex === -1) return positions;
+    if (expandingIndex === null || expandingIndex === -1) {
+      return positions;
+    }
 
-    const expandingRow = positions[expandingIndex].row;
+    const expandingRow = Math.floor(expandingIndex / numCols) + 1;
     
-    // Find the sibling (other card in same row)
-    const siblingIndex = expandingIndex % 2 === 0 ? expandingIndex + 1 : expandingIndex - 1;
+    const cardsToRelayout = [];
+    for (let i = 0; i < projects.length; i++) {
+      if (i === expandingIndex) continue;
+      const originalRow = Math.floor(i / numCols) + 1;
+      if (originalRow >= expandingRow) {
+        cardsToRelayout.push(i);
+      }
+    }
     
-    // Only proceed if sibling exists
-    if (siblingIndex < projects.length) {
-      const siblingOriginalCol = positions[siblingIndex].col;
-      
-      // Check if this is the last row (no cards below the expanding row)
-      const isLastRow = !projects.some((_, i) => {
-        const cardRow = Math.floor(i / 2) + 1;
-        return cardRow > expandingRow;
-      });
-      
-      if (isLastRow) {
-        // If it's the last row, sibling moves to column 2 of the same row
-        positions[siblingIndex] = {
-          row: expandingRow,
-          col: 2
-        };
-      } else {
-        // If not the last row, sibling moves down one row but stays in its original column
-        positions[siblingIndex] = {
-          row: expandingRow + 1,
-          col: siblingOriginalCol
-        };
+    let currentRow = expandingRow + 1;
+    let currentCol = 1;
 
-        // Find all cards that need to slide down:
-        // Cards in the same column as the sibling, below the expanding row
-        for (let i = 0; i < projects.length; i++) {
-          if (i === expandingIndex || i === siblingIndex) continue;
-          
-          const originalPos = {
-            row: Math.floor(i / 2) + 1,
-            col: (i % 2) + 1
-          };
+    for (const cardIndex of cardsToRelayout) {
+      positions[cardIndex] = { row: currentRow, col: currentCol };
 
-          // If card is in same column as sibling and below the expanding row, slide it down
-          if (originalPos.col === siblingOriginalCol && originalPos.row > expandingRow) {
-            const newRow = originalPos.row + 1;
-            
-            // Special case: If this is the bottom card in column 1 and has no neighbor,
-            // slide it to column 2 instead of moving it down in column 1
-            const isBottomCardInCol1 = originalPos.col === 1 && i === projects.length - 1 && projects.length % 2 === 1;
-            
-            if (isBottomCardInCol1) {
-              positions[i] = {
-                row: originalPos.row, // Keep the same row, just move to column 2
-                col: 2
-              };
-            } else {
-              positions[i] = {
-                row: newRow,
-                col: originalPos.col
-              };
-            }
-          }
-        }
+      currentCol++;
+      if (currentCol > numCols) {
+        currentCol = 1;
+        currentRow++;
       }
     }
 
@@ -160,23 +152,20 @@ const Index = () => {
     const newPositions = calculateCardPositions(index);
     setCardPositions(newPositions);
     setExpandingCardIndex(index);
-    setExpandStage('row');
     
-    // After row expansion, transition to fullscreen
+    // Scroll the card into view on the next frame, syncing with the CSS transition start
     setTimeout(() => {
-      setExpandStage('fullscreen');
-    }, 600);
+      const cardElement = cardRefs.current[index];
+      if (cardElement) {
+        smoothScrollTo(cardElement, 600);
+      }
+    }, 0);
   };
 
   const handleCardClose = () => {
-    setExpandStage(null);
-    // Reset positions to original layout
+    setExpandingCardIndex(null);
     const originalPositions = calculateCardPositions(-1);
     setCardPositions(originalPositions);
-    
-    setTimeout(() => {
-      setExpandingCardIndex(null);
-    }, 300);
   };
 
   return (
@@ -225,6 +214,7 @@ const Index = () => {
               return (
                 <ProjectCard
                   key={project.title}
+                  ref={el => cardRefs.current[index] = el}
                   title={project.title}
                   description={project.description}
                   technologies={project.technologies}
@@ -235,7 +225,6 @@ const Index = () => {
                   index={index}
                   isExpanding={isExpanding}
                   isSibling={isSibling}
-                  expandStage={expandStage}
                   targetPosition={targetPosition}
                   onExpand={() => handleCardExpand(index)}
                   onClose={handleCardClose}

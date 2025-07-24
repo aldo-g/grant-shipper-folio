@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Globe, Github, Maximize2, X } from "lucide-react";
@@ -14,13 +15,12 @@ interface ProjectCardProps {
   index: number;
   isExpanding: boolean;
   isSibling: boolean;
-  expandStage: 'row' | 'fullscreen' | null;
   targetPosition?: { row: number; col: number };
   onExpand: () => void;
   onClose: () => void;
 }
 
-export const ProjectCard = ({ 
+export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(({ 
   title, 
   description, 
   technologies, 
@@ -32,11 +32,10 @@ export const ProjectCard = ({
   index,
   isExpanding,
   isSibling,
-  expandStage,
   targetPosition,
   onExpand,
   onClose
-}: ProjectCardProps) => {
+}, ref) => {
 
   // Prevent event bubbling when clicking on links
   const handleLinkClick = (e: React.MouseEvent) => {
@@ -77,13 +76,14 @@ export const ProjectCard = ({
       }
     }
     
-    return "transition-all duration-300";
+    return "transition-all duration-600 ease-out";
   };
 
   const cardHeight = isExpanding ? "min-h-[600px]" : "h-[400px]";
 
   return (
     <Card 
+      ref={ref}
       className={`${!isExpanding ? 'card-hover' : ''} border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden relative group ${cardHeight} ${getCardClasses()}`}
       onClick={!isExpanding ? onExpand : undefined}
       style={{ cursor: isExpanding ? 'default' : 'pointer' }}
@@ -239,4 +239,4 @@ export const ProjectCard = ({
       </div>
     </Card>
   );
-};
+});
