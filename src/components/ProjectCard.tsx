@@ -124,18 +124,6 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(({
               )}
             </div>
             <div className="flex gap-2">
-              {isExpanding && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onClose();
-                  }}
-                  className="text-muted-foreground hover:text-accent transition-colors bg-background/60 backdrop-blur-sm rounded-full p-2 hover:bg-background/80"
-                  aria-label="Close expanded view"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              )}
               {websiteUrl && (
                 <a
                   href={websiteUrl}
@@ -158,6 +146,31 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(({
               >
                 <Github className="h-5 w-5" />
               </a>
+              {isExpanding ? (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onClose();
+                  }}
+                  className="text-muted-foreground hover:text-accent transition-colors bg-background/60 backdrop-blur-sm rounded-full p-2 hover:bg-background/80"
+                  aria-label="Close expanded view"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              ) : (
+                description.length > 120 && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onExpand();
+                    }}
+                    className="text-muted-foreground hover:text-accent transition-colors bg-background/60 backdrop-blur-sm rounded-full p-2 hover:bg-background/80"
+                    aria-label={`Expand ${title} details`}
+                  >
+                    <Maximize2 className="h-5 w-5" />
+                  </button>
+                )
+              )}
             </div>
           </div>
         </CardHeader>
@@ -170,18 +183,6 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(({
                 <CardDescription className="text-white leading-relaxed drop-shadow-sm bg-background/70 backdrop-blur-md rounded-lg p-4 max-h-24 overflow-hidden">
                   {description.length > 120 ? `${description.substring(0, 120)}...` : description}
                 </CardDescription>
-                {description.length > 120 && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onExpand();
-                    }}
-                    className="absolute bottom-3 right-3 text-accent hover:text-accent/80 transition-colors bg-background/80 backdrop-blur-sm rounded-full p-1 hover:bg-background/90 shadow-lg"
-                    aria-label={`Expand ${title} details`}
-                  >
-                    <Maximize2 className="h-4 w-4" />
-                  </button>
-                )}
               </div>
               <div className="flex flex-wrap gap-2">
                 {technologies.map((tech) => (
