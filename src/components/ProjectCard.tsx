@@ -91,13 +91,13 @@ export const ProjectCard = ({
       {/* Background Image covering entire card */}
       {image && (
         <div 
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+          className={`absolute inset-0 bg-cover bg-center transition-transform duration-500 ${!isExpanding ? 'group-hover:scale-105' : ''}`}
           style={{ backgroundImage: `url(${image})` }}
         />
       )}
       
       {/* Gradient overlay - more pronounced when expanded for readability */}
-      <div className={`absolute inset-0 transition-all duration-600 ${
+      <div className={`absolute inset-0 ${
         isExpanding 
           ? "bg-gradient-to-b from-transparent via-card/30 to-card/90" 
           : "bg-gradient-to-b from-transparent via-transparent to-card/40"
@@ -197,27 +197,29 @@ export const ProjectCard = ({
             </>
           ) : (
             // Expanded view - takes up more space with consistent styling
-            <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-700 delay-300">
+            <div className="space-y-6">
               {/* Full Description */}
               <div className="bg-background/40 backdrop-blur-md rounded-xl p-6 space-y-4 border border-border/20">
-                <h3 className="text-xl font-semibold text-foreground drop-shadow-sm">About This Project</h3>
-                <p className="text-white leading-relaxed text-base drop-shadow-sm">
-                  {description}
-                </p>
-                
-                {/* Detailed Description if provided */}
-                {detailedDescription && (
-                  <div className="pt-4 border-t border-border/30">
-                    <h4 className="text-lg font-semibold text-foreground mb-3 drop-shadow-sm">Technical Details</h4>
-                    <p className="text-white leading-relaxed whitespace-pre-line drop-shadow-sm">
-                      {detailedDescription}
-                    </p>
-                  </div>
-                )}
+                <div className="animate-in fade-in duration-300">
+                  <h3 className="text-xl font-semibold text-foreground drop-shadow-sm">About This Project</h3>
+                  <p className="text-white leading-relaxed text-base drop-shadow-sm">
+                    {description}
+                  </p>
+                  
+                  {/* Detailed Description if provided */}
+                  {detailedDescription && (
+                    <div className="pt-4 border-t border-border/30">
+                      <h4 className="text-lg font-semibold text-foreground mb-3 drop-shadow-sm">Technical Details</h4>
+                      <p className="text-white leading-relaxed whitespace-pre-line drop-shadow-sm">
+                        {detailedDescription}
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Technologies Section */}
-              <div className="p-6">
+              <div className="p-6 animate-in fade-in duration-300">
                 <h4 className="text-lg font-semibold text-foreground mb-4 drop-shadow-sm">Technologies Used</h4>
                 <div className="flex flex-wrap gap-3">
                   {technologies.map((tech) => (
