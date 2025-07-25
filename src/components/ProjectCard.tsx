@@ -7,6 +7,8 @@ interface ProjectCardProps {
   title: string;
   description: string;
   technologies: string[];
+  size: string;
+  category: string;
   githubUrl: string;
   websiteUrl?: string;
   type?: string;
@@ -24,6 +26,8 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(({
   title, 
   description, 
   technologies, 
+  size,
+  category,
   githubUrl, 
   websiteUrl, 
   type, 
@@ -36,6 +40,20 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(({
   onExpand,
   onClose
 }, ref) => {
+
+  // Helper function to get badge colors for different tag types
+  const getBadgeColor = (tagType: 'size' | 'category' | 'technology') => {
+    switch (tagType) {
+      case 'size':
+        return 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40 hover:bg-yellow-500/30';
+      case 'category':
+        return 'bg-red-500/20 text-red-300 border-red-500/40 hover:bg-red-500/30';
+      case 'technology':
+        return 'bg-green-500/20 text-green-300 border-green-500/40 hover:bg-green-500/30';
+      default:
+        return 'bg-gray-500/20 text-gray-300 border-gray-500/40 hover:bg-gray-500/30';
+    }
+  };
 
   // Prevent event bubbling when clicking on links
   const handleLinkClick = (e: React.MouseEvent) => {
@@ -185,15 +203,40 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(({
                 </CardDescription>
               </div>
               <div className="flex flex-wrap gap-2">
-                {technologies.map((tech) => (
+                {/* Size and Category tags */}
+                <Badge
+                  variant="outline"
+                  className={`text-xs capitalize ${getBadgeColor('size')} backdrop-blur-sm transition-colors`}
+                >
+                  {size}
+                </Badge>
+                <Badge
+                  variant="outline"
+                  className={`text-xs ${getBadgeColor('category')} backdrop-blur-sm transition-colors`}
+                >
+                  {category}
+                </Badge>
+                
+                {/* Technology tags - limited to 3 in compact view */}
+                {technologies.slice(0, 3).map((tech) => (
                   <Badge
                     key={tech}
                     variant="outline"
-                    className="text-xs border-accent/40 text-accent bg-background/40 backdrop-blur-sm hover:bg-background/60 transition-colors"
+                    className={`text-xs ${getBadgeColor('technology')} backdrop-blur-sm transition-colors`}
                   >
                     {tech}
                   </Badge>
                 ))}
+                
+                {/* Show +X more if there are more than 3 technologies */}
+                {technologies.length > 3 && (
+                  <Badge
+                    variant="outline"
+                    className="text-xs bg-gray-500/20 text-gray-300 border-gray-500/40 backdrop-blur-sm"
+                  >
+                    +{technologies.length - 3} more
+                  </Badge>
+                )}
               </div>
             </>
           ) : (
@@ -219,20 +262,34 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(({
                 </div>
               </div>
 
-              {/* Technologies Section */}
-              <div className="p-6 animate-in fade-in duration-300">
-                <h4 className="text-lg font-semibold text-foreground mb-4 drop-shadow-sm">Technologies Used</h4>
-                <div className="flex flex-wrap gap-3">
-                  {technologies.map((tech) => (
-                    <Badge
-                      key={tech}
-                      variant="outline"
-                      className="text-sm border-accent/40 text-accent bg-background/20 backdrop-blur-sm hover:bg-background/40 transition-colors px-4 py-2"
-                    >
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
+              {/* Project Details Section */}
+              <div className="flex flex-wrap gap-3">
+                {/* Size tag */}
+                <Badge
+                  variant="outline"
+                  className={`text-sm capitalize ${getBadgeColor('size')} backdrop-blur-sm px-4 py-2`}
+                >
+                  {size}
+                </Badge>
+                
+                {/* Category tag */}
+                <Badge
+                  variant="outline"
+                  className={`text-sm ${getBadgeColor('category')} backdrop-blur-sm px-4 py-2`}
+                >
+                  {category}
+                </Badge>
+                
+                {/* All technology tags */}
+                {technologies.map((tech) => (
+                  <Badge
+                    key={tech}
+                    variant="outline"
+                    className={`text-sm ${getBadgeColor('technology')} backdrop-blur-sm px-4 py-2`}
+                  >
+                    {tech}
+                  </Badge>
+                ))}
               </div>
             </div>
           )}
