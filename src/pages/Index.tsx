@@ -14,7 +14,15 @@ const tabs = [
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("projects");
-  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(true); // Start with chat open
+  const [isFirstVisit, setIsFirstVisit] = useState(true); // Track if this is the first time
+
+  const handleChatToggle = () => {
+    setIsChatOpen(!isChatOpen);
+    if (isFirstVisit) {
+      setIsFirstVisit(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -69,12 +77,13 @@ const Index = () => {
 
       {/* Chat Components */}
       <ChatButton 
-        onClick={() => setIsChatOpen(!isChatOpen)} 
+        onClick={handleChatToggle} 
         isOpen={isChatOpen}
       />
       <ChatOverlay 
         isOpen={isChatOpen} 
-        onClose={() => setIsChatOpen(false)} 
+        onClose={() => setIsChatOpen(false)}
+        isFirstTime={isFirstVisit}
       />
     </div>
   );

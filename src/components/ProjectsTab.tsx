@@ -75,9 +75,9 @@ const easeInOutQuad = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 const smoothScrollTo = (element: HTMLElement, duration: number) => {
   const startingY = window.pageYOffset;
   const elementY = window.pageYOffset + element.getBoundingClientRect().top;
-  // Use the card's known final height (600px) for a stable calculation
-  const finalCardHeight = 600; 
-  const targetY = elementY - (window.innerHeight / 2) + (finalCardHeight / 2);
+  // Move card to top of page with some padding
+  const topOffset = 30; // Pixels from top of viewport
+  const targetY = elementY - topOffset;
   const diff = targetY - startingY;
   let start: number;
 
