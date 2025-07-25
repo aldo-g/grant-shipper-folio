@@ -2,92 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Badge } from "@/components/ui/badge";
 import { X, Filter } from "lucide-react";
-
-const projects = [
-  {
-    title: "SQLCore",
-    description: "A lightweight Python package for managing synchronous and asynchronous database connections with SQL Server.\n\nFeatures connection pooling, raw SQL execution, stored procedures, and table-valued functions support for seamless database interactions.",
-    technologies: ["Python", "SQL Server", "ODBC", "Async/Await", "Connection Pooling", "pyodbc"],
-    size: "small",
-    category: "Database",
-    githubUrl: "https://github.com/aldo-g/SQLCore",
-    websiteUrl: "https://pypi.org/project/sqlcore/",
-    type: "Python Database Library",
-    image: "src/assets/sql-core-photo.png"
-  },
-{
-  title: "Vuxi",
-  description: "AI-powered UX analysis platform that provides comprehensive website evaluation through automated screenshot capture, expert-level AI analysis, and detailed reporting. Features multi-step analysis wizard, real-time progress tracking, professional reports with actionable insights, and microservices architecture for scalable analysis workflows.",
-  technologies: ["Next.js", "TypeScript", "React", "AI/ML Analysis", "Microservices", "Node.js", "Express", "Anthropic AI", "Google AI", "Lighthouse"],
-  size: "large",
-  category: "AI Platform",
-  githubUrl: "https://github.com/aldo-g/Vuxi",
-  type: "UX Analysis Platform",
-  image: "src/assets/vuxi-photo.png"
-},
-{
-  title: "No Public Purpose",
-  description: "Amsterdam-based music collective hosting intimate electronic music events and parties. Features event countdown timers, photo galleries from past events, integrated audio player with SoundCloud tracks, and contact information for booking inquiries.",
-  technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "SoundCloud API", "Vite"],
-  size: "medium",
-  category: "Entertainment",
-  githubUrl: "https://github.com/aldo-g/NoPublicPurpose",
-  websiteUrl: "https://www.nopublicpurpose.com",
-  type: "Music Collective Website",
-  image: "src/assets/no-public-purpose-logo.png"
-},
-  {
-    title: "Obsidian LLM Test",
-    description: "Experimental integration testing framework for Large Language Models within the Obsidian ecosystem. Explores AI-powered knowledge management.",
-    technologies: [
-    "obsidian-plugin",
-    "llm-integration", 
-    "typescript",
-    "multimodal",
-    "local-llms",
-    "json-processing",
-    ],
-    size: "small",
-    category: "Experiment",
-    githubUrl: "https://github.com/aldo-g/obsidian-llm-test",
-    type: "AI Experiment",
-    image: "src/assets/obsidian-llm-test.png",
-    video: "src/assets/LLM-test-gen.mov",
-    detailedDescription: "This project demonstrates the integration of Large Language Models directly into Obsidian's note-taking environment. The system allows users to interact with AI models for content generation, analysis, and knowledge management tasks without leaving their note-taking workflow."
-  },
-    {
-    title: "Rota Boat",
-    description: "A simple one-page React website for managing boat bookings among friends. Features a drag-and-drop calendar interface where users can assign members to specific days and view current bookings.",
-    technologies: ["React", "Firebase", "Firestore", "CSS", "JavaScript"],
-    size: "small",
-    category: "Application",
-    githubUrl: "https://github.com/aldo-g/rota-boat",
-    websiteUrl: "https://rota-boat.web.app",
-    type: "Web Application",
-    image: "src/assets/rota-boat-photo.png"
-    },
-{
-  title: "EPI Global Conflict Map",
-  description: "Interactive world map visualizing real-time global conflicts with detailed analytics. Features conflict categorization, intensity mapping, and comprehensive filtering for conflict research and analysis.",
-  technologies: ["D3.js", "JavaScript", "CSS", "Data Visualization", "Geospatial Analysis"],
-  size: "large",
-  category: "Visualization",
-  githubUrl: "https://github.com/aldo-g/conflict-map",
-  websiteUrl: "https://conflict-map.vercel.app",
-  type: "Data Visualization",
-  image: "src/assets/conflict-map.png"
-},
-    {
-        title: "Compile Context Extension",
-        description: "VSCode extension that generates comprehensive context files containing project file trees and contents. Designed to provide LLMs with complete codebase context for better code assistance and analysis.",
-        technologies: ["TypeScript", "VSCode API", "Node.js", "File System"],
-        size: "small",
-        category: "Developer Tools",
-        githubUrl: "https://github.com/aldo-g/compile-context-ext",
-        type: "VSCode Extension",
-        image: "src/assets/compile-context-ext.png"
-    }
-];
+import { projects } from "@/data/projects";
 
 interface CardPosition {
   row: number;
@@ -274,7 +189,7 @@ export const ProjectsTab = () => {
         <div className="text-center lg:text-left space-y-4">
           <h2 className="text-3xl font-bold text-foreground">Featured Projects</h2>
           <p className="text-muted-foreground">
-            A collection of experiments, tools, and frameworks I've built
+            A collection of experiments, tools, and frameworks I've built to explore AI, data, and modern web technologies
           </p>
         </div>
         
@@ -447,8 +362,8 @@ export const ProjectsTab = () => {
                 websiteUrl={project.websiteUrl}
                 type={project.type}
                 image={project.image}
-                video={project.video}                           // Add this line
-                detailedDescription={project.detailedDescription} // Add this line
+                video={project.video}
+                detailedDescription={project.detailedDescription}
                 index={index}
                 isExpanding={isExpanding}
                 isSibling={isSibling}
