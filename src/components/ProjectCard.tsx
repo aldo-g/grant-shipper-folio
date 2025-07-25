@@ -13,6 +13,7 @@ interface ProjectCardProps {
   websiteUrl?: string;
   type?: string;
   image?: string;
+  video?: string;
   detailedDescription?: string;
   index: number;
   isExpanding: boolean;
@@ -32,6 +33,7 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(({
   websiteUrl, 
   type, 
   image, 
+  video,
   detailedDescription,
   index,
   isExpanding,
@@ -63,7 +65,7 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(({
   // Get animation classes based on card state
   const getCardClasses = () => {
     if (isExpanding) {
-      // Expanding to fill row without scaling up
+      // Expanding to fill row without scaling up - reduced height with scrollable content
       return "md:col-span-2 transition-all duration-600 ease-out min-h-[600px]";
     } else if (targetPosition) {
       // Use calculated target position for sliding animation
@@ -242,21 +244,42 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(({
           ) : (
             // Expanded view - takes up more space with consistent styling
             <div className="space-y-6">
-              {/* Full Description */}
-              <div className="bg-background/40 backdrop-blur-md rounded-xl p-6 space-y-4 border border-border/20">
-                <div className="animate-in fade-in duration-300">
-                  <h3 className="text-xl font-semibold text-foreground drop-shadow-sm">About This Project</h3>
-                  <p className="text-white leading-relaxed text-base drop-shadow-sm">
-                    {description}
-                  </p>
-                  
-                  {/* Detailed Description if provided */}
-                  {detailedDescription && (
-                    <div className="pt-4 border-t border-border/30">
-                      <h4 className="text-lg font-semibold text-foreground mb-3 drop-shadow-sm">Technical Details</h4>
-                      <p className="text-white leading-relaxed whitespace-pre-line drop-shadow-sm">
-                        {detailedDescription}
-                      </p>
+              {/* Combined Content Section - Scrollable */}
+              <div className="bg-background/40 backdrop-blur-md rounded-xl border border-border/20 max-h-96 overflow-y-auto">
+                <div className="p-6 space-y-6">
+                  {/* About This Project */}
+                  <div className="animate-in fade-in duration-300">
+                    <h3 className="text-xl font-semibold text-foreground drop-shadow-sm mb-4">About This Project</h3>
+                    <p className="text-white leading-relaxed text-base drop-shadow-sm">
+                      {description}
+                    </p>
+                    
+                    {/* Detailed Description if provided */}
+                    {detailedDescription && (
+                      <div className="pt-4 border-t border-border/30 mt-4">
+                        <h4 className="text-lg font-semibold text-foreground mb-3 drop-shadow-sm">Technical Details</h4>
+                        <p className="text-white leading-relaxed whitespace-pre-line drop-shadow-sm">
+                          {detailedDescription}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Video Demo Section */}
+                  {video && (
+                    <div className="animate-in fade-in duration-300 delay-150 border-t border-border/30 pt-6">
+                      <h3 className="text-xl font-semibold text-foreground drop-shadow-sm mb-4">Demo</h3>
+                      <div className="relative rounded-lg overflow-hidden bg-black/20">
+                        <video
+                          src={video}
+                          controls
+                          className="w-full h-auto max-h-64 object-contain"
+                          preload="metadata"
+                          poster={image}
+                        >
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
                     </div>
                   )}
                 </div>

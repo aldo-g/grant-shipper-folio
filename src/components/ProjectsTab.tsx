@@ -36,7 +36,7 @@ const projects = [
     type: "Analysis Tool",
     image: "src/assets/no-public-purpose-logo.png"
   },
-  {
+{
     title: "Obsidian LLM Test",
     description: "Experimental integration testing framework for Large Language Models within the Obsidian ecosystem. Explores AI-powered knowledge management.",
     technologies: ["LLM", "Obsidian", "AI Integration", "Testing"],
@@ -44,7 +44,9 @@ const projects = [
     category: "Experiment",
     githubUrl: "https://github.com/aldo-g/obsidian-llm-test",
     type: "AI Experiment",
-    image: "src/assets/obsidian-llm-test.png"
+    image: "src/assets/obsidian-llm-test.png",
+    video: "src/assets/LLM-test-gen.mov",
+    detailedDescription: "This project demonstrates the integration of Large Language Models directly into Obsidian's note-taking environment. The system allows users to interact with AI models for content generation, analysis, and knowledge management tasks without leaving their note-taking workflow."
   },
   {
     title: "Rota Boat",
@@ -427,7 +429,7 @@ export const ProjectsTab = () => {
             
             return (
               <ProjectCard
-                key={`${project.title}-${selectedFilters.join('-')}`} // Key includes filters to handle re-ordering
+                key={`${project.title}-${selectedFilters.join('-')}`}
                 ref={el => cardRefs.current[index] = el}
                 title={project.title}
                 description={project.description}
@@ -438,13 +440,15 @@ export const ProjectsTab = () => {
                 websiteUrl={project.websiteUrl}
                 type={project.type}
                 image={project.image}
+                video={project.video}                           // Add this line
+                detailedDescription={project.detailedDescription} // Add this line
                 index={index}
                 isExpanding={isExpanding}
                 isSibling={isSibling}
                 targetPosition={targetPosition}
                 onExpand={() => handleCardExpand(index)}
                 onClose={handleCardClose}
-              />
+                />
             );
           })}
         </div>
