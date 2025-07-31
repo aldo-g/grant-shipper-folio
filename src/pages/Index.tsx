@@ -67,16 +67,19 @@ const Index = () => {
                   </div>
                 </div>
                 
-                <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-                  I'm passionate about using tech to make a real difference in international development and public good. After studying development economics and international relations, I've built skills in Python, FastAPI, React, and DevOps – all with the goal of creating tools that matter.
-
-                  At Rabobank's Gen!Lab, I work as a DevOps Engineer pioneering GenAI products. My day-to-day involves setting up infrastructure as code (IaC) and creating ETL flows that enrich our offerings with diverse datasets. I've helped boost the maturity of our backend and frontend applications by implementing tests and compliance checks, and played a key role in developing our Quart backend API and React frontend.
-
-                  Beyond my tech work, I serve as a Trustee for the Cameron Grant Memorial Trust, where we've organized fundraisers with 200+ attendees and managed an innovation grants program that's distributed over £50,000 to various charities. This balance lets me combine technical skills with active stakeholder engagement – I'm as comfortable writing code as I am managing projects or communicating complex ideas to diverse audiences. What drives me is finding that sweet spot where technology meets
-                  impact, whether I'm streamlining database operations with SQLCore or creating mental health awareness tools through Cameron's Coasters (https://www.camgrant.org.uk/coasters/).
-
-                  I'm looking for roles where I can apply my tech background to international development challenges and build tools that empower communities. If your organization values innovation and using technology for good, let's connect!
-                </p>
+                <div className="space-y-4">
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    DevOps Engineer at Rabobank's Gen!Lab pioneering GenAI products. I combine technical expertise in Python, React, and AI/ML with a passion for international development and public good.
+                  </p>
+                  
+                  <p className="text-base text-muted-foreground leading-relaxed">
+                    Currently building infrastructure as code (IaC) and ETL flows for AI applications, while serving as Trustee for the Cameron Grant Memorial Trust, managing £50,000+ in innovation grants.
+                  </p>
+                  
+                  <p className="text-base text-muted-foreground leading-relaxed">
+                    Looking to apply technology for meaningful impact in international development.
+                  </p>
+                </div>
               </div>
 
               {/* Social Links - Vertical on the right */}
