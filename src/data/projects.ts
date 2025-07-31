@@ -1,4 +1,4 @@
-// src/data/projects.ts
+// src/data/projects.ts - Update all image and video paths
 
 export interface Project {
   title: string;
@@ -40,7 +40,7 @@ Performance optimizations include intelligent connection reuse, query result cac
     githubUrl: "https://github.com/aldo-g/SQLCore",
     websiteUrl: "https://pypi.org/project/sqlcore/",
     type: "Python Database Library",
-    image: "src/assets/sql-core-photo.png"
+    image: "/assets/sql-core-photo.png" // Updated path
   },
   {
     title: "Vuxi",
@@ -73,7 +73,7 @@ Security and privacy are built-in from the ground up, with all analysis happenin
     category: "AI Platform",
     githubUrl: "https://github.com/aldo-g/Vuxi",
     type: "UX Analysis Platform",
-    image: "src/assets/vuxi-photo.png"
+    image: "/assets/vuxi-photo.png" // Updated path
   },
   {
     title: "No Public Purpose",
@@ -108,7 +108,7 @@ The project demonstrates how technical skills can serve creative communities, pr
     githubUrl: "https://github.com/aldo-g/NoPublicPurpose",
     websiteUrl: "https://www.nopublicpurpose.com",
     type: "Music Collective Website",
-    image: "src/assets/no-public-purpose-logo.png"
+    image: "/assets/no-public-purpose-logo.png" // Updated path
   },
   {
     title: "Obsidian LLM Test",
@@ -147,8 +147,8 @@ The experimental nature allows for rapid iteration and testing of new AI capabil
     category: "Experiment",
     githubUrl: "https://github.com/aldo-g/obsidian-llm-test",
     type: "AI Experiment",
-    image: "src/assets/obsidian-llm-test.png",
-    video: "src/assets/LLM-test-gen.mov"
+    image: "/assets/obsidian-llm-test.png", // Updated path
+    video: "/assets/LLM-test-gen.mov" // Updated path
   },
   {
     title: "Rota Boat",
@@ -186,7 +186,7 @@ The success of this project demonstrates the value of technology solutions that 
     githubUrl: "https://github.com/aldo-g/rota-boat",
     websiteUrl: "https://rota-boat.web.app",
     type: "Web Application",
-    image: "src/assets/rota-boat-photo.png"
+    image: "/assets/rota-boat-photo.png" // Updated path
   },
   {
     title: "EPI Global Conflict Map",
@@ -234,7 +234,7 @@ This project demonstrates the power of data visualization in making complex geop
     githubUrl: "https://github.com/aldo-g/conflict-map",
     websiteUrl: "https://conflict-map.vercel.app",
     type: "Data Visualization",
-    image: "src/assets/conflict-map.png"
+    image: "/assets/conflict-map.png" // Updated path
   },
   {
     title: "Compile Context Extension",
@@ -282,6 +282,6 @@ The tool represents a practical solution to one of the key limitations of curren
     category: "Developer Tools",
     githubUrl: "https://github.com/aldo-g/compile-context-ext",
     type: "VSCode Extension",
-    image: "src/assets/compile-context-ext.png"
+    image: "/assets/compile-context-ext.png" // Updated path
   }
 ];

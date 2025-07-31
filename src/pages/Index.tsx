@@ -1,3 +1,4 @@
+// src/pages/Index.tsx - Remove the import and use direct path
 import { useState, useRef } from "react";
 import { SocialLinks } from "@/components/SocialLinks";
 import { ProjectsTab } from "@/components/ProjectsTab";
@@ -5,7 +6,7 @@ import { ExperienceTab } from "@/components/ExperienceTab";
 import { LiquidTabBar } from "@/components/LiquidTabBar";
 import { ChatButton } from "@/components/ChatButton";
 import { ChatOverlay } from "@/components/ChatOverlay";
-import profilePhoto from "@/assets/profile-photo.jpg";
+// Remove this line: import profilePhoto from "@/assets/profile-photo.jpg";
 
 const tabs = [
   { id: "projects", label: "Projects" },
@@ -103,7 +104,7 @@ const Index = () => {
                   <div className="relative">
                     <div className="absolute inset-0 bg-accent/20 rounded-full blur-2xl scale-110" />
                     <img
-                      src={profilePhoto}
+                      src="/assets/profile-photo.jpg"
                       alt="Alastair Grant"
                       className="relative w-40 h-40 lg:w-48 lg:h-48 rounded-full object-cover border-2 border-accent/30 shadow-xl"
                     />

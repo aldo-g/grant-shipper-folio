@@ -1,7 +1,9 @@
+// src/components/SocialLinks.tsx - Remove imports and use direct paths
 import { Linkedin, BookOpen } from "lucide-react";
-import githubLogo from "@/assets/github-logo.png";
-import linkedinLogo from "@/assets/linkedin-logo.png";
-import mediumLogo from "@/assets/medium-logo.png";
+// Remove these imports:
+// import githubLogo from "@/assets/github-logo.png";
+// import linkedinLogo from "@/assets/linkedin-logo.png";
+// import mediumLogo from "@/assets/medium-logo.png";
 
 interface SocialLink {
   href: string;
@@ -13,17 +15,17 @@ interface SocialLink {
 const socialLinks: SocialLink[] = [
   {
     href: "https://github.com/aldo-g",
-    customIcon: githubLogo,
+    customIcon: "/assets/github-logo.png", // Updated path
     label: "GitHub"
   },
   {
     href: "https://www.linkedin.com/in/alastair-grant-genai-dev/",
-    customIcon: linkedinLogo,
+    customIcon: "/assets/linkedin-logo.png", // Updated path
     label: "LinkedIn"
   },
   {
     href: "https://medium.com/@mjkzrdmrk",
-    customIcon: mediumLogo,
+    customIcon: "/assets/medium-logo.png", // Updated path
     label: "Medium"
   }
 ];

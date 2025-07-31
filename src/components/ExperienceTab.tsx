@@ -69,7 +69,7 @@ const certifications = [
     issued: "Jun 2025",
     credentialId: null,
     skills: ["Azure AI Studio", "Microsoft Azure", "Agentic AI"],
-    badge: "src/assets/deal-ready-badge.png"
+    badge: "/assets/deal-ready-badge.png" // Updated path
   },
   {
     title: "Agentic AI Solution Architecture — Participant", 
@@ -77,7 +77,7 @@ const certifications = [
     issued: "Jun 2025",
     credentialId: null,
     skills: ["Microsoft Azure", "Azure AI Studio", "Agentic AI"],
-    badge: "src/assets/solution-architect-badge.png"
+    badge: "/assets/solution-architect-badge.png" // Updated path
   },
   {
     title: "Microsoft Certified: Azure Fundamentals",
@@ -85,7 +85,7 @@ const certifications = [
     issued: "Oct 2023",
     credentialId: "BB36E68ED4904335",
     skills: ["Microsoft Azure"],
-    badge: "src/assets/az-900-badge.png"
+    badge: "/assets/az-900-badge.png" // Updated path
   }
 ];
 
