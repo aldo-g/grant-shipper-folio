@@ -14,8 +14,11 @@ const tabs = [
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("projects");
-  const [isChatOpen, setIsChatOpen] = useState(true); // Start with chat open
-  const [isFirstVisit, setIsFirstVisit] = useState(true); // Track if this is the first time
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isFirstVisit, setIsFirstVisit] = useState(true);
+  
+  // FEATURE FLAG: Set to true to enable chat, false to disable
+  const CHAT_ENABLED = false;
 
   const handleChatToggle = () => {
     setIsChatOpen(!isChatOpen);
@@ -71,20 +74,29 @@ const Index = () => {
         <div className="mt-20 pt-8 border-t border-border/50 text-center">
           <p className="text-muted-foreground text-sm">
             Built with React, TypeScript, and Tailwind CSS
+            {CHAT_ENABLED && (
+              <span className="block mt-2 text-xs opacity-70">
+                💬 Chat assistant available
+              </span>
+            )}
           </p>
         </div>
       </div>
 
-      {/* Chat Components */}
-      <ChatButton 
-        onClick={handleChatToggle} 
-        isOpen={isChatOpen}
-      />
-      <ChatOverlay 
-        isOpen={isChatOpen} 
-        onClose={() => setIsChatOpen(false)}
-        isFirstTime={isFirstVisit}
-      />
+      {/* Chat Components - Only render if feature is enabled */}
+      {CHAT_ENABLED && (
+        <>
+          <ChatButton 
+            onClick={handleChatToggle} 
+            isOpen={isChatOpen}
+          />
+          <ChatOverlay 
+            isOpen={isChatOpen} 
+            onClose={() => setIsChatOpen(false)}
+            isFirstTime={isFirstVisit}
+          />
+        </>
+      )}
     </div>
   );
 };
