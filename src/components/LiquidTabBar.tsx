@@ -24,10 +24,11 @@ export const LiquidTabBar: React.FC<LiquidTabBarProps> = ({
     left: number;
   }>({ width: 0, left: 0 });
   
+  const [isInitialized, setIsInitialized] = useState(false);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const updateIndicatorPosition = () => {
     const activeIndex = tabs.findIndex(tab => tab.id === activeTab);
     const activeTabElement = tabRefs.current[activeIndex];
     
@@ -38,6 +39,52 @@ export const LiquidTabBar: React.FC<LiquidTabBarProps> = ({
       setIndicatorStyle({
         width: tabRect.width,
         left: tabRect.left - containerRect.left
+      });
+      
+      if (!isInitialized) {
+        setIsInitialized(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Initial position calculation with multiple attempts for Safari
+    const calculatePosition = () => {
+      updateIndicatorPosition();
+    };
+
+    // Immediate calculation
+    calculatePosition();
+
+    // Delayed calculations for Safari compatibility
+    const timeouts = [
+      setTimeout(calculatePosition, 0),
+      setTimeout(calculatePosition, 10),
+      setTimeout(calculatePosition, 50),
+      setTimeout(calculatePosition, 100)
+    ];
+
+    // Cleanup timeouts
+    return () => {
+      timeouts.forEach(timeout => clearTimeout(timeout));
+    };
+  }, [activeTab, tabs, isInitialized]);
+
+  // Recalculate on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      updateIndicatorPosition();
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [activeTab, tabs]);
+
+  // Safari-specific: Recalculate after fonts load
+  useEffect(() => {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        setTimeout(updateIndicatorPosition, 10);
       });
     }
   }, [activeTab, tabs]);
@@ -65,7 +112,10 @@ export const LiquidTabBar: React.FC<LiquidTabBarProps> = ({
         
         {/* Sliding Glass Indicator with Gradient Pickup */}
         <div
-          className="absolute top-1 bottom-1 rounded-full transition-all duration-700 ease-out"
+          className={cn(
+            "absolute top-1 bottom-1 rounded-full transition-all ease-out",
+            isInitialized ? "duration-700" : "duration-0" // No animation on initial load
+          )}
           style={{
             width: `${indicatorStyle.width}px`,
             left: `${indicatorStyle.left}px`,
@@ -87,11 +137,11 @@ export const LiquidTabBar: React.FC<LiquidTabBarProps> = ({
               0 8px 32px rgba(0, 0, 0, 0.1)
             `,
             border: '1px solid rgba(255, 255, 255, 0.2)',
-            transition: `
+            transition: isInitialized ? `
               left 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
               width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
               background-position 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)
-            `
+            ` : 'none'
           }}
         >
           {/* Glass Overlay Effect */}
@@ -126,7 +176,13 @@ export const LiquidTabBar: React.FC<LiquidTabBarProps> = ({
         {tabs.map((tab, index) => (
           <button
             key={tab.id}
-            ref={(el) => (tabRefs.current[index] = el)}
+            ref={(el) => {
+              tabRefs.current[index] = el;
+              // Trigger recalculation when ref is set (Safari fix)
+              if (el && !isInitialized) {
+                setTimeout(updateIndicatorPosition, 0);
+              }
+            }}
             onClick={() => onTabChange(tab.id)}
             className={cn(
               "relative z-10 px-6 py-3 text-base font-medium rounded-full transition-all duration-300",
