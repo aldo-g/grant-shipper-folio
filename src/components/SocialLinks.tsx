@@ -30,7 +30,7 @@ const socialLinks: SocialLink[] = [
 
 export const SocialLinks = () => {
   return (
-    <div className="flex gap-6 justify-center">
+    <>
       {socialLinks.map((link) => {
         return (
           <a
@@ -38,21 +38,26 @@ export const SocialLinks = () => {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-1 rounded-full bg-card/50 border border-border/50 text-muted-foreground hover:text-accent hover:border-accent/50 transition-all duration-300 hover:scale-110 hover:shadow-lg flex items-center justify-center"
+            className="group relative p-3 rounded-xl bg-card/60 border border-border/50 text-muted-foreground hover:text-accent hover:border-accent/50 transition-all duration-300 hover:scale-105 hover:shadow-lg backdrop-blur-sm"
             aria-label={link.label}
           >
             {link.customIcon ? (
               <img 
                 src={link.customIcon} 
                 alt={link.label}
-                className="h-12 w-12 object-contain opacity-90 hover:opacity-100 transition-opacity filter brightness-110 hover:brightness-125"
+                className="h-12 w-12 object-contain opacity-100 group-hover:opacity-100 transition-opacity filter brightness-110 group-hover:brightness-125"
               />
             ) : (
-              link.icon && <link.icon className="h-12 w-12" />
+              link.icon && <link.icon className="h-6 w-6" />
             )}
+            
+            {/* Tooltip - positioned to the left for vertical layout */}
+            <div className="absolute right-full top-1/2 transform -translate-y-1/2 mr-2 px-2 py-1 bg-card border border-border/50 text-xs text-foreground rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none backdrop-blur-sm whitespace-nowrap">
+              {link.label}
+            </div>
           </a>
         );
       })}
-    </div>
+    </>
   );
 };
