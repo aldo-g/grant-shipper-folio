@@ -1,4 +1,3 @@
-// src/pages/Index.tsx - Remove the import and use direct path
 import { useState, useRef } from "react";
 import { SocialLinks } from "@/components/SocialLinks";
 import { ProjectsTab } from "@/components/ProjectsTab";
@@ -6,7 +5,6 @@ import { ExperienceTab } from "@/components/ExperienceTab";
 import { LiquidTabBar } from "@/components/LiquidTabBar";
 import { ChatButton } from "@/components/ChatButton";
 import { ChatOverlay } from "@/components/ChatOverlay";
-// Remove this line: import profilePhoto from "@/assets/profile-photo.jpg";
 
 const tabs = [
   { id: "projects", label: "Projects" },
@@ -124,22 +122,22 @@ const Index = () => {
                         GenAI Developer
                       </span>
                       <span className="px-4 py-2 bg-card/50 text-muted-foreground border border-border/50 rounded-full text-sm font-medium backdrop-blur-sm">
-                        AI/ML Engineer
+                        DevOps Engineer
                       </span>
                     </div>
                   </div>
                   
                   <div className="space-y-4">
                     <p className="text-lg text-muted-foreground leading-relaxed">
-                      DevOps Engineer at Rabobank's Gen!Lab pioneering GenAI products. I combine technical expertise in Python, React, and AI/ML with a passion for international development and public good.
+                      DevOps Engineer specializing in GenAI integration at Rabobank's Gen!Lab. I build production-ready AI products through reusable, compliant infrastructure as code and robust ETL pipelines.
                     </p>
                     
                     <p className="text-base text-muted-foreground leading-relaxed">
-                      Currently building infrastructure as code (IaC) and ETL flows for AI applications, while serving as Trustee for the Cameron Grant Memorial Trust, managing £50,000+ in innovation grants.
+                      Currently freelancing as a GenAI and web developer with expertise in <strong>Python</strong>, <strong>TypeScript</strong>, and <strong>React</strong>. I combine technical depth with a passion for creating scalable AI solutions.
                     </p>
                     
                     <p className="text-base text-muted-foreground leading-relaxed">
-                      Looking to apply technology for meaningful impact in international development.
+                      Seeking opportunities to apply technology for meaningful impact in international development and public good initiatives.
                     </p>
                   </div>
                 </div>
