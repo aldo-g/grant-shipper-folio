@@ -200,7 +200,7 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(({
             // Compact view
             <>
               <div className="relative">
-                <CardDescription className="text-white leading-relaxed drop-shadow-sm bg-background/70 backdrop-blur-md rounded-lg p-4 max-h- overflow-hidden whitespace-pre-line">
+                <CardDescription className="text-white leading-relaxed drop-shadow-sm bg-background/70 backdrop-blur-md rounded-lg p-4 max-h-24 overflow-hidden whitespace-pre-line">
                   {description.length > 120 ? `${description.substring(0, 120)}...` : description}
                 </CardDescription>
               </div>
@@ -245,7 +245,7 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(({
             // Expanded view - takes up more space with consistent styling
             <div className="space-y-6">
               {/* Combined Content Section - Scrollable */}
-              <div className="bg-background/40 backdrop-blur-md rounded-xl border border-border/20 max-h-96 overflow-y-auto">
+              <div className="bg-black/80 backdrop-blur-md rounded-xl border border-border/20 max-h-96 overflow-y-auto">
                 <div className="p-6 space-y-6">
                   {/* About This Project */}
                   <div className="animate-in fade-in duration-300">

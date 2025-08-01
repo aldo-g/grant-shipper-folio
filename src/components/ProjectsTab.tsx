@@ -189,7 +189,7 @@ export const ProjectsTab = () => {
         <div className="text-center lg:text-left space-y-4">
           <h2 className="text-3xl font-bold text-foreground">Featured Projects</h2>
           <p className="text-muted-foreground">
-            A collection of experiments, tools, and frameworks I've built to explore AI, data, and modern web technologies
+            A collection of websites, tools, and experiments I've built to explore modern web technologies and AI integration.
           </p>
         </div>
         
