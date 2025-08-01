@@ -200,7 +200,7 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(({
             // Compact view
             <>
               <div className="relative">
-                <CardDescription className="text-white leading-relaxed drop-shadow-sm bg-background/70 backdrop-blur-md rounded-lg p-4 max-h-24 overflow-hidden whitespace-pre-line">
+                <CardDescription className="text-white leading-relaxed drop-shadow-sm bg-background/70 backdrop-blur-md rounded-lg p-4 max-h- overflow-hidden whitespace-pre-line">
                   {description.length > 120 ? `${description.substring(0, 120)}...` : description}
                 </CardDescription>
               </div>
