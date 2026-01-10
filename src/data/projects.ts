@@ -46,6 +46,7 @@ Security and privacy are built-in from the ground up, with all analysis happenin
     size: "large",
     category: "AI Platform",
     githubUrl: "https://github.com/aldo-g/Vuxi",
+    websiteUrl: "https://www.vuxi.ai/reports",
     type: "UX Analysis Platform",
     image: "/assets/vuxi-photo.png"
   },
@@ -97,7 +98,81 @@ Performance optimizations include connection reuse, query result caching, and ef
     image: "/assets/obsidian-llm-test.png",
     video: "/assets/LLM-test-gen.mov"
   },
-    {
+  {
+    title: "Selectr",
+    description: `Selectr is a Tinder-style curation app for your music library and playlists. It lets you quickly review and clean up tracks from connected streaming services using a fast, swipe-based interface.
+
+Each card includes a 30-second preview with a generated waveform plus key metadata like popularity, genres, and explicit status. I built it with a clean, layered SwiftUI architecture and a focus on smooth playback and extensibility for more providers beyond Spotify.`,
+    detailedDescription: `Key features:
+• Swipe-to-sort flow for keeping or removing tracks from liked songs and playlists
+• Contextual previews with waveform rendering and rich track metadata
+• Reliable 30-second audio playback with throttled waveform updates and fallback preview resolution
+• SwiftUI-based layered architecture (App → UI → Core) for clear separation of concerns
+• Future-ready provider integrations (Spotify today, Apple Music/Deezer/YouTube Music next)
+
+Technical implementation:
+• Swift concurrency with async/await and actors for networking, persistence, and waveform generation
+• @MainActor ObservableObject state in App/Stores and UI/ViewModels consuming Core actors
+• Secure token handling via KeychainSecureStore with resilient review/history storage`,
+    technologies: ["Swift", "SwiftUI", "iOS", "Async/Await", "Actors", "Spotify API", "Keychain"],
+    size: "small",
+    category: "Mobile",
+    githubUrl: "https://github.com/aldo-g/SpotifySort",
+    websiteUrl: "https://apps.apple.com/nl/app/selectr/id6755160110?l=en-GB",
+    type: "iOS App",
+    image: "/assets/Selectr-1024.png"
+  },
+  {
+    title: "Ticktr",
+    description: `Ticktr is a minimalist Apple Wallet pass generator that uses Gemini AI to turn any ticket or PDF into a clean, functional pass for iPhone.
+
+It extracts event details from uploads, preserves QR/barcodes, and generates a signed .pkpass file ready for Apple Wallet, with artistic, high-contrast backgrounds based on the original ticket's vibe.`,
+    detailedDescription: `Highlights:
+• Gemini 2.5 Flash parsing to extract event names, dates, times, and locations
+• Automatic visual styling to create high-contrast pass designs
+• Cryptographically signed .pkpass generation for native Wallet compatibility
+• QR/barcode detection with preservation of original ticket codes
+• Privacy-first handling with in-memory caching and immediate deletion after download
+
+Implementation:
+• Vite + React + TypeScript frontend with Tailwind CSS and Lucide icons
+• Node.js + Express signing server using passkit-generator
+• Gemini integration via @google/genai`,
+    technologies: ["Vite", "React", "TypeScript", "Tailwind CSS", "Node.js", "Express", "Gemini", "PassKit", "Gen AI", "Vision Model"],
+    size: "small",
+    category: "Application",
+    githubUrl: "https://github.com/aldo-g/Ticketr",
+    websiteUrl: "https://ticktr.info",
+    type: "Web App",
+    image: "/assets/ticktr-photo.png"
+  },
+  {
+    title: "All Around Australia",
+    description: `An interactive map visualization tracking my journey around Australia, powered by Strava data and built with modern web technologies.
+
+It renders daily route segments on a Leaflet map with amber hover effects, a glassmorphic timeline sidebar, and smart interactions that focus the map and sidebar on the selected day.`,
+    detailedDescription: `Highlights:
+• Leaflet map using Esri World Ocean Base tiles with smooth hover glow effects
+• Click-to-focus interactions that sync the map and timeline sidebar
+• Glassmorphic, collapsible sidebar with accordion-based day detail
+• Auto-scroll to the active journey segment for quick context
+• Geotagged photo clustering with an interactive carousel
+• Strava data synced to local JSON via Node.js scripts
+
+Implementation:
+• React 19 + TypeScript with Vite
+• React Leaflet + Leaflet for map rendering
+• CSS Modules for custom dark/glassmorphism styling
+• Lucide React icons`,
+    technologies: ["React", "TypeScript", "Vite", "Leaflet", "React Leaflet", "CSS Modules", "Strava API", "Lucide"],
+    size: "small",
+    category: "Visualization",
+    githubUrl: "https://github.com/aldo-g/all-around-australia",
+    websiteUrl: "https://aldo-g.github.io/all-around-australia/",
+    type: "Interactive Map",
+    image: "/assets/australia-photo.png"
+  },
+  {
     title: "Compile Context Extension",
     description: `I built compile-context-ext as a tool to enhance interactions with LLMs. In my early days of coding, I realized that when I used an LLM to help understand code, I often didn't have the whole flow captured when I sent a single file for analysis.
 
@@ -122,21 +197,6 @@ Integration Features:
     image: "/assets/compile-context-ext.png"
   },
   {
-    title: "No Public Purpose",
-    description: `I made this website for No Public Purpose, a music collective based in Amsterdam. This project gave me the opportunity to try new web development and frontend technologies like Lovable.ai.
-
-    This was one of my first "vibe coded" projects, where I wanted to test how well these technologies could be used to create a functional and good-looking website. While it was an interesting experiment, and I do sometimes still use Lovable today to create a framework for websites, this is the only project I have done where I solely relied on AI tools.
-
-    I also used this project as a reason to try hosting with Vercel, which I now use for multiple personal projects to quickly set up web hosting.`,
-    technologies: ["Loveable", "Vibe Coding", "SoundCloud API", "Vite"],
-    size: "small",
-    category: "Entertainment",
-    githubUrl: "https://github.com/aldo-g/NoPublicPurpose",
-    websiteUrl: "https://www.nopublicpurpose.com",
-    type: "Music Collective Website",
-    image: "/assets/no-public-purpose-logo.png"
-  },
-  {
     title: "Rota Boat",
     description: `This is a simple one-page React application that I made for myself and my friends to manage our boat bookings during the summer. It's a basic React application that uses Firebase for real-time data storage and retrieval. It provided me with a great opportunity to learn about Firebase and how to use it in a React application, as well as how to deploy a web application to Firebase Hosting.
 
@@ -151,42 +211,12 @@ Users can easily assign group members to specific days, view current bookings at
 • Drag-and-drop functionality for intuitive booking management
 • Visual calendar interface showing availability at a glance
 • Real-time updates when bookings are made or changed`,
-    technologies: ["React", "Firebase", "Firestore", "CSS", "JavaScript"],
+    technologies: ["React", "Firebase", "Firestore", "CSS", "JavaScript", "Mobile"],
     size: "small",
     category: "Application",
     githubUrl: "https://github.com/aldo-g/rota-boat",
     websiteUrl: "https://rota-boat.web.app",
     type: "Web Application",
     image: "/assets/rota-boat-photo.png"
-  },
-  {
-    title: "EPI Global Conflict Map",
-    description: `This is an interactive world map I created for the Edinburgh Peace Institute (EPI) to visualize global conflicts in real-time. It uses the Armed Conflict Location and Event Data (ACLED) API to fetch data about real-world conflicts.
-
-    The map is built with D3.js and uses a custom algorithm to calculate the intensity of each conflict based on the number of events and their severity. It allows users to filter conflicts by type, intensity, and location, and provides a detailed view of each conflict when clicked.
-
-This tool was built to provide EPI with a way to visualize global conflicts on the front end of their website.`,
-    detailedDescription: `Data Visualization Features:
-• Interactive world map with zoom and pan capabilities
-• Conflict categorization by type (armed conflict, terrorism, civil unrest, etc.)
-• Intensity mapping with color-coded severity indicators
-• Geographic clustering for region-specific analysis
-• Temporal filtering to track conflicts over time
-
-Technical Architecture:
-• D3.js for sophisticated data visualization and map rendering
-• Custom algorithms for conflict intensity calculation
-• Efficient data processing for real-time map updates
-• Responsive design ensuring usability across all device types
-• Performance optimization for handling large datasets
-
-This project demonstrates the power of data visualization in making complex geopolitical information accessible and actionable for decision-makers across multiple domains.`,
-    technologies: ["D3.js", "JavaScript", "CSS", "Data Visualization", "Geospatial Analysis"],
-    size: "large",
-    category: "Visualization",
-    githubUrl: "https://github.com/aldo-g/conflict-map",
-    websiteUrl: "https://conflict-map.vercel.app",
-    type: "Data Visualization",
-    image: "/assets/conflict-map.png"
   }
 ];
