@@ -5,7 +5,7 @@ import { Calendar, MapPin, GraduationCap, Award, FileCheck, Users } from "lucide
 
 const experiences = [
   {
-    title: "DevOps Engineer",
+    title: "Software Engineer - Applied AI & Platform",
     company: "Rabobank - Data & Analytics",
     period: "JUNE 2024 – PRESENT",
     description: "I transferred Rabobank's Data & Analytics department to join the newly formed Generative AI team. Our responsibility was to create building blocks for Generative AI, that could be lifted and shifted to other applications, so that Generative AI tools could be developed and deployed quickly throughout the bank. I focused on building Retrieval Augmented Generation (RAG) building blocks. Using Terraform IAC to create a standardised infrastructure for how we would host RAG applications within Azure. We then developed CI/CD pipelines that used this infrastructure, as well as our existing BE and FE solutions to quickly create full stack Generative AI applications that could be created by even non-technical members of the bank.",
@@ -15,7 +15,7 @@ const experiences = [
       "Developed a Configurator module for our Generative AI applications to enable non technical Users to configure their own prompts, and data",
       "Created our ETL pipeline to standardise all unstructured data our RAG applications would import. This included using OCR technologies to diversify what documents we could use, as well as other traditional methods"
     ],
-    technologies: ["Terraform", "Azure", "RAG", "Generative AI", "CI/CD", "ETL", "OCR"],
+    technologies: ["Applied AI", "Platform Engineering", "Cloud (Azure)", "Data Pipelines", "CI/CD"],
     type: "current"
   },
   {
@@ -29,7 +29,7 @@ const experiences = [
       "Oversaw the transition of the VCV API from the innovation department to Wholesale and Rural",
       "Created CI/CD pipelines to automate testing for the application, as well as other compliancy checks like CheckMarx and SonarQube"
     ],
-    technologies: ["Python", "Backend Development", "API Development", "CI/CD", "Database", "Compliance"],
+    technologies: ["Backend Systems", "APIs", "Data", "Compliance", "CI/CD"],
     type: "previous"
   }
 ];

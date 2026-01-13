@@ -117,27 +117,26 @@ const Index = () => {
                     <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight">
                       Alastair Grant
                     </h1>
-                    <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-                      <span className="px-4 py-2 bg-accent/20 text-accent border border-accent/30 rounded-full text-sm font-medium backdrop-blur-sm">
-                        GenAI Developer
-                      </span>
-                      <span className="px-4 py-2 bg-card/50 text-muted-foreground border border-border/50 rounded-full text-sm font-medium backdrop-blur-sm">
-                        DevOps Engineer
-                      </span>
-                    </div>
+                    <p className="text-2xl lg:text-3xl font-semibold text-foreground tracking-tight">
+                      Software Engineer
+                    </p>
                   </div>
                   
                   <div className="space-y-4">
-                    <p className="text-lg text-muted-foreground leading-relaxed">
-                      DevOps Engineer specializing in GenAI integration at Rabobank's Gen!Lab. I build production-ready AI products through reusable, compliant infrastructure as code and robust ETL pipelines.
-                    </p>
-                    
                     <p className="text-base text-muted-foreground leading-relaxed">
-                      Currently freelancing as a GenAI and web developer with expertise in <strong>Python</strong>, <strong>TypeScript</strong>, and <strong>React</strong>. I combine technical depth with a passion for creating scalable AI solutions.
+                      I build production software, with a focus on backend systems and applied AI.
                     </p>
-                    
+
                     <p className="text-base text-muted-foreground leading-relaxed">
-                      Seeking opportunities to apply technology for meaningful impact in international development and public good initiatives.
+                      I'm a software engineer with experience building and operating systems in regulated environments. My work is backend-first, but I'm comfortable taking features end-to-end, from APIs and data pipelines to infrastructure and user-facing applications.
+                    </p>
+
+                    <p className="text-base text-muted-foreground leading-relaxed">
+                      I've worked on applied AI systems in production, including document processing, retrieval-augmented generation, and internal developer tooling, with an emphasis on reliability, security, and long-term maintainability.
+                    </p>
+
+                    <p className="text-base text-muted-foreground leading-relaxed">
+                      I'm drawn to problems where engineering quality matters: systems that need to scale, comply, and be trusted by real users.
                     </p>
                   </div>
                 </div>
