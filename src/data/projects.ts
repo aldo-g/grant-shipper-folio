@@ -79,7 +79,7 @@ Performance optimizations include connection reuse, query result caching, and ef
     type: "Python Database Library",
     image: "/assets/sql-core-photo.png"
   },
-    {
+  {
     title: "Obsidian LLM Test",
     description: `While studying for an Azure exam, I wanted to see how well Large Language Models (LLMs) could assist with testing my knowledge. Therefore, I created this Obsidian plugin that takes a note file and generates a series of questions with different difficulty levels based on the note's content. Once the questions are generated, it takes your answers and scores them, providing feedback on where you went wrong.
 
@@ -97,6 +97,40 @@ Performance optimizations include connection reuse, query result caching, and ef
     type: "AI Experiment",
     image: "/assets/obsidian-llm-test.png",
     video: "/assets/LLM-test-gen.mov"
+  },
+  {
+    title: "Contour Map Studio",
+    description: `Route Art (Contour Map Studio) turns your runs, rides, and hikes into minimalist contour-map posters. Upload a GPX or pull recent Strava activities, explore auto-detected landmarks, tweak styling (dark mode, water shading, markers, orientation), edit route stats, and export a high-resolution PNG that’s ready to print or share.`,
+    detailedDescription: `Features:
+• GPX upload and Strava OAuth import with activity selection
+• Auto-detected landmarks with add/remove, custom landmarks, and selection tools
+• Design controls for dark/light mode, water shading, start/end markers, and portrait/landscape ratios
+• Editable stats (route name, location, distance, gain/loss, dates) with overrides
+• Optional flag/custom image badge and high-resolution PNG export
+• Session persistence so in-progress edits survive refreshes
+
+Tech stack:
+• Next.js 16 (App Router) + React 19
+• Tailwind CSS 4
+• Map/geo helpers: @turf/turf, @mapbox/polyline, osmtogeojson
+• Rendering/export: jspdf, pngjs`,
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Mapbox",
+      "Strava API",
+      "Turf.js",
+      "GeoJSON",
+      "GPX"
+    ],
+    size: "small",
+    category: "Visualization",
+    githubUrl: "https://github.com/aldo-g/route-art",
+    websiteUrl: "https://route-art.vercel.app",
+    type: "Route Art Studio",
+    image: "/assets/contour-wooduct.png"
   },
   {
     title: "Selectr",
