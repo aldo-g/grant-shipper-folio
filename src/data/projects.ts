@@ -14,9 +14,9 @@ export interface Project {
 
 export const projects: Project[] = [
     {
-    "title": "Agent-Time",
-    "description": "Agent-Time is an autonomous Manifold prediction-market trading system built around a two-phase LangChain agent flow: a Plan phase that researches markets and creates a structured trade plan, and an Execution phase that only executes the approved actions. It runs on a schedule, logs runs/trades, tracks portfolio performance, and serves a live dashboard/API.",
-    "detailedDescription": "Agent-Time separates decision quality from order execution with a strict two-phase architecture. In Plan phase, the LangChain agent uses research and portfolio tools to produce JSON trade actions with rationale, sizing, and catalysts. In Execution phase, a second LangChain run consumes that approved plan and uses trade tools only, without inventing new positions. The system persists results to JSONL and optional Postgres, supports local Docker workflows, and deploys to AWS via Terraform (EC2, ECR, SSM, CloudWatch, optional ALB/ACM/Route53).",
+    "title": "Prediction Agent",
+    "description": "Prediction Agent is an autonomous Manifold prediction-market trading system built around a two-phase LangChain agent flow: a Plan phase that researches markets and creates a structured trade plan, and an Execution phase that only executes the approved actions. It runs on a schedule, logs runs/trades, tracks portfolio performance, and serves a live dashboard/API.",
+    "detailedDescription": "Prediction Agent separates decision quality from order execution with a strict two-phase architecture. In Plan phase, the LangChain agent uses research and portfolio tools to produce JSON trade actions with rationale, sizing, and catalysts. In Execution phase, a second LangChain run consumes that approved plan and uses trade tools only, without inventing new positions. The system persists results to JSONL and optional Postgres, supports local Docker workflows, and deploys to AWS via Terraform (EC2, ECR, SSM, CloudWatch, optional ALB/ACM/Route53).",
     "technologies": [
       "Python",
       "LangChain",
