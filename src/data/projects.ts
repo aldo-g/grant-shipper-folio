@@ -13,7 +13,30 @@ export interface Project {
 }
 
 export const projects: Project[] = [
-
+    {
+    "title": "Agent-Time",
+    "description": "Agent-Time is an autonomous Manifold prediction-market trading system built around a two-phase LangChain agent flow: a Plan phase that researches markets and creates a structured trade plan, and an Execution phase that only executes the approved actions. It runs on a schedule, logs runs/trades, tracks portfolio performance, and serves a live dashboard/API.",
+    "detailedDescription": "Agent-Time separates decision quality from order execution with a strict two-phase architecture. In Plan phase, the LangChain agent uses research and portfolio tools to produce JSON trade actions with rationale, sizing, and catalysts. In Execution phase, a second LangChain run consumes that approved plan and uses trade tools only, without inventing new positions. The system persists results to JSONL and optional Postgres, supports local Docker workflows, and deploys to AWS via Terraform (EC2, ECR, SSM, CloudWatch, optional ALB/ACM/Route53).",
+    "technologies": [
+      "Python",
+      "LangChain",
+      "OpenAI API",
+      "Manifold API",
+      "PostgreSQL",
+      "Docker",
+      "Terraform",
+      "AWS EC2",
+      "AWS SSM",
+      "CloudWatch",
+      "JavaScript"
+    ],
+    "size": "small",
+    "category": "AI Platform",
+    "githubUrl": "https://github.com/aldo-g/Agent-Time",
+    "type": "Autonomous Trading Agent",
+    websiteUrl: "https://predictionagent.alastairgrant.dev",
+    image: "src/assets/predictionagent.png"
+  },
   {
     title: "Vuxi",
     description: `Vuxi is a Software-as-a-Service (SaaS) platform that provides UX analysis for websites using vision models and LLM analysis. I created Vuxi after working with a number of charities and small organizations to provide analysis of their websites. I was curious to see how accurately LLMs could provide that service.
