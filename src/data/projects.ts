@@ -35,7 +35,7 @@ export const projects: Project[] = [
     "githubUrl": "https://github.com/aldo-g/Agent-Time",
     "type": "Autonomous Trading Agent",
     websiteUrl: "https://predictionagent.alastairgrant.dev",
-    image: "src/assets/predictionagent.png"
+    image: "/assets/predictionagent.png"
   },
   {
     title: "Vuxi",
