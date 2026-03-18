@@ -2,13 +2,15 @@ import { useState, useRef } from "react";
 import { SocialLinks } from "@/components/SocialLinks";
 import { ProjectsTab } from "@/components/ProjectsTab";
 import { ExperienceTab } from "@/components/ExperienceTab";
+import { WritingsTab } from "@/components/WritingsTab";
 import { LiquidTabBar } from "@/components/LiquidTabBar";
 import { ChatButton } from "@/components/ChatButton";
 import { ChatOverlay } from "@/components/ChatOverlay";
 
 const tabs = [
   { id: "projects", label: "Projects" },
-  { id: "experience", label: "Experience" }
+  { id: "experience", label: "Experience" },
+  { id: "writings", label: "Writings" }
 ];
 
 const Index = () => {
@@ -43,13 +45,13 @@ const Index = () => {
     const swipeDistance = touchStartX.current - touchEndX;
     const minSwipeDistance = 75;
     
+    const tabOrder = ["projects", "experience", "writings"];
+    const currentIndex = tabOrder.indexOf(activeTab);
     if (Math.abs(swipeDistance) > minSwipeDistance) {
-      if (swipeDistance > 0 && activeTab === "projects") {
-        // Swiped left - go to experience tab
-        setActiveTab("experience");
-      } else if (swipeDistance < 0 && activeTab === "experience") {
-        // Swiped right - go to projects tab
-        setActiveTab("projects");
+      if (swipeDistance > 0 && currentIndex < tabOrder.length - 1) {
+        setActiveTab(tabOrder[currentIndex + 1]);
+      } else if (swipeDistance < 0 && currentIndex > 0) {
+        setActiveTab(tabOrder[currentIndex - 1]);
       }
     }
     
@@ -70,11 +72,13 @@ const Index = () => {
     const swipeDistance = touchStartX.current - mouseEndX;
     const minSwipeDistance = 75;
     
+    const tabOrder = ["projects", "experience", "writings"];
+    const currentIndex = tabOrder.indexOf(activeTab);
     if (Math.abs(swipeDistance) > minSwipeDistance) {
-      if (swipeDistance > 0 && activeTab === "projects") {
-        setActiveTab("experience");
-      } else if (swipeDistance < 0 && activeTab === "experience") {
-        setActiveTab("projects");
+      if (swipeDistance > 0 && currentIndex < tabOrder.length - 1) {
+        setActiveTab(tabOrder[currentIndex + 1]);
+      } else if (swipeDistance < 0 && currentIndex > 0) {
+        setActiveTab(tabOrder[currentIndex - 1]);
       }
     }
     
@@ -159,29 +163,18 @@ const Index = () => {
             </div>
 
             {/* Tab Content */}
-            {activeTab === "projects" ? (
-              <div 
-                className="select-none touch-pan-y"
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseLeave}
-              >
-                <ProjectsTab />
-              </div>
-            ) : (
-              <div 
-                className="select-none touch-pan-y"
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseLeave}
-              >
-                <ExperienceTab />
-              </div>
-            )}
+            <div
+              className="select-none touch-pan-y"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onMouseDown={handleMouseDown}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseLeave}
+            >
+              {activeTab === "projects" && <ProjectsTab />}
+              {activeTab === "experience" && <ExperienceTab />}
+              {activeTab === "writings" && <WritingsTab />}
+            </div>
 
             {/* Footer */}
             <div className="mt-20 pt-8 border-t border-border/50 text-center">
