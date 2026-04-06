@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { SocialLinks } from "@/components/SocialLinks";
 import { ProjectsTab } from "@/components/ProjectsTab";
 import { ExperienceTab } from "@/components/ExperienceTab";
@@ -17,7 +17,14 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState("projects");
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isFirstVisit, setIsFirstVisit] = useState(true);
-  
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 80);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   // Touch/swipe handling
   const touchStartX = useRef(0);
   const isDragging = useRef(false);
@@ -91,6 +98,23 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Sticky Header */}
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-background/70 backdrop-blur-md border-b border-border/30"
+          : "pointer-events-none opacity-0"
+      }`}>
+        <div className="container mx-auto px-6 max-w-6xl flex items-center justify-between h-14">
+          <span className="text-sm font-semibold text-foreground tracking-tight">Alastair Grant</span>
+          <a
+            href="mailto:alastairegrant@pm.me"
+            className="px-4 py-1.5 rounded-xl bg-card/60 border border-border/50 text-muted-foreground hover:text-accent hover:border-accent/50 text-sm font-medium transition-all duration-300 hover:shadow-lg backdrop-blur-sm"
+          >
+            Contact Me
+          </a>
+        </div>
+      </header>
+
       <div className="container mx-auto px-6 py-16 max-w-6xl">
         {/* Main Container - wraps all content in hero-style container with dynamic height */}
         <div className="relative">
