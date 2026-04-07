@@ -69,7 +69,7 @@ Security and privacy are built-in from the ground up, with all analysis happenin
     size: "large",
     category: "AI Platform",
     githubUrl: "https://github.com/aldo-g/Vuxi",
-    websiteUrl: "https://www.vuxi.ai/reports",
+    websiteUrl: "https://www.vuxi.ai",
     type: "UX Analysis Platform",
     image: "/assets/vuxi-photo.png"
   },
